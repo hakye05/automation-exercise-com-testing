@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.Objects;
 
@@ -57,4 +58,17 @@ public class BasePage {
         select.selectByVisibleText(text);
     }
 
+    protected void uploadFile(By locator, String filePath) {
+        File file = new File(filePath);
+
+        if (!file.exists()) {
+            throw new IllegalArgumentException("File not found at " + filePath);
+        }
+        type(locator, file.getAbsolutePath());
+    }
+
+    protected void acceptAlert() {
+        wait.until(ExpectedConditions.alertIsPresent());
+        driver.switchTo().alert().accept();
+    }
 }
