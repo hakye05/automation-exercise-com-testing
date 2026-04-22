@@ -82,8 +82,16 @@ public class BasePage {
         return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
     }
 
+    protected List<WebElement> findAllNested(WebElement parent, By locator) {
+        return parent.findElements(locator);
+    }
+
     protected void waitForVisibilityOf(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    protected void waitForInvisibilityOf(By locator) {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
     protected void scrollToElement(By locator) {
