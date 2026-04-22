@@ -2,6 +2,7 @@ package com.automationexercise.pages;
 
 import com.automationexercise.pages.auth.LoginPage;
 import com.automationexercise.pages.base.BasePage;
+import com.automationexercise.pages.shop.ProductsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -26,6 +27,11 @@ public class HomePage extends BasePage {
     public LoginPage clickLoginLink() {
         clickAvoidingVignette(loginLink);
         return new LoginPage(driver);
+    }
+
+    public ProductsPage clickProductsLink() {
+        clickAvoidingVignette(productsLink);
+        return new ProductsPage(driver);
     }
 
     // Getter Methods

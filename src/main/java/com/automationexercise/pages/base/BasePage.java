@@ -1,15 +1,13 @@
 package com.automationexercise.pages.base;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.List;
 import java.util.Objects;
 
 public class BasePage {
@@ -70,5 +68,29 @@ public class BasePage {
     protected void acceptAlert() {
         wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
+    }
+
+    protected WebElement find(By locator) {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
+    protected WebElement findNested(WebElement parent, By childLocator) {
+        return wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(parent, childLocator));
+    }
+
+    protected List<WebElement> findAll(By locator) {
+        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+    }
+
+    protected void waitForVisibilityOf(By locator) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    protected void scrollToElement(By locator) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", locator);
+    }
+
+    protected void scrollToElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
     }
 }
