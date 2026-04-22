@@ -1,7 +1,11 @@
 package com.automationexercise.pages;
 
+import com.automationexercise.pages.auth.AccountDeletedPage;
 import com.automationexercise.pages.auth.LoginPage;
 import com.automationexercise.pages.base.BasePage;
+import com.automationexercise.pages.info.ContactUsPage;
+import com.automationexercise.pages.info.TestCasesPage;
+import com.automationexercise.pages.shop.CartPage;
 import com.automationexercise.pages.shop.ProductsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -29,9 +33,34 @@ public class HomePage extends BasePage {
         return new LoginPage(driver);
     }
 
+    public LoginPage clickLogoutLink() {
+        clickAvoidingVignette(logoutLink);
+        return new LoginPage(driver);
+    }
+
+    public AccountDeletedPage clickDeleteAccountLink() {
+        clickAvoidingVignette(deleteAccountLink);
+        return new AccountDeletedPage(driver);
+    }
+
     public ProductsPage clickProductsLink() {
         clickAvoidingVignette(productsLink);
         return new ProductsPage(driver);
+    }
+
+    public CartPage clickCartLink() {
+        clickAvoidingVignette(cartLink);
+        return new CartPage(driver);
+    }
+
+    public TestCasesPage clickTestCasesLink() {
+        clickAvoidingVignette(testCasesLink);
+        return new TestCasesPage(driver);
+    }
+
+    public ContactUsPage clickContactUsLink() {
+        clickAvoidingVignette(contactUsLink);
+        return new ContactUsPage(driver);
     }
 
     // Getter Methods
