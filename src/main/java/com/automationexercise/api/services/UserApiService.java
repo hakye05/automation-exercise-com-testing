@@ -1,6 +1,7 @@
 package com.automationexercise.api.services;
 
 import com.automationexercise.api.RestClient;
+import com.automationexercise.models.UserAuthData;
 import com.automationexercise.models.UserData;
 import io.restassured.response.Response;
 
@@ -17,7 +18,7 @@ public class UserApiService extends RestClient {
         return postForm(USER_CREATE, convertToMap(userData));
     }
 
-    public Response deleteUser(String email, String password) {
-        return delete(USER_DELETE, Map.of("email", email, "password", password));
+    public Response deleteUser(UserAuthData userAuthData) {
+        return deleteForm(USER_DELETE, convertToMap(userAuthData));
     }
 }

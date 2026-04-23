@@ -38,10 +38,10 @@ public class RestClient {
                 .post(endpoint);
     }
 
-    protected Response delete(String endpoint, Map<String, ?> queryParams) {
+    protected Response deleteForm(String endpoint, Map<String, ?> formData) {
         return given()
                 .spec(ApiClient.getRequestSpec())
-                .queryParams(queryParams)
+                .formParams(formData)
                 .when()
                 .delete(endpoint);
     }
