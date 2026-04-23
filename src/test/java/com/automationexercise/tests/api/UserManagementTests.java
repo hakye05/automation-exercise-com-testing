@@ -41,6 +41,58 @@ public class UserManagementTests extends BaseTestApiUser {
         user = null;
     }
 
+    @Test
+    public void shouldVerifyLoginUserWithCorrectCredentials() {
+        user = DataGenerator.createUser();
+        userApiService.createUser(user);
+
+        Response response = userApiService.verifyLogin(new UserAuthData(user.email(), user.password()));
+
+        response.then()
+                .statusCode(200)
+                .body("responseCode", equalTo(200))
+                .body("message", equalTo("User exists!"));
+    }
+
+    @Test
+    public void shouldFailToLoginUserWithoutEmail() {
+        user = DataGenerator.createUser();
+
+        Response response = userApiService.verifyLogin(new UserAuthData("", user.password()));
+
+        response.then()
+                .statusCode(200)
+                .body("responseCode", equalTo(400))
+                .body("message", equalTo("Bad request, email or password parameter is missing in POST request."));
+
+        user = null;
+    }
+
+    @Test
+    public void shouldFailToLoginUserWithInvalidPassword() {
+        user = DataGenerator.createUser();
+        userApiService.createUser(user);
+
+        Response response = userApiService.verifyLogin(new UserAuthData(user.email(), "invalidPassword123"));
+
+        response.then()
+                .statusCode(200)
+                .body("responseCode", equalTo(404))
+                .body("message", equalTo("User not found!"));
+    }
+
+    @Test
+    public void shouldGetUserDetails() {
+        user = DataGenerator.createUser();
+        userApiService.createUser(user);
+
+        Response response = userApiService.getUserDetails(user.email());
+
+        response.then().statusCode(200)
+                .body("responseCode", equalTo(200))
+                .body("user.name", equalTo(user.name()));
+    }
+
     @AfterMethod(alwaysRun = true)
     public void cleanupUser() {
         try {
