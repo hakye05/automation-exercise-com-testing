@@ -4,11 +4,11 @@ import com.automationexercise.api.ApiClient;
 import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 
 public class BaseTestApi {
 
-    @BeforeMethod
+    @BeforeSuite
     public void setup() {
         RestAssured.registerParser("text/html", Parser.JSON);
     }
