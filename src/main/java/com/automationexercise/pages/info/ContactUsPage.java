@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class ContactUsPage extends BasePage {
 
-    private By contactUsHeader = By.cssSelector(".col-sm-12 h2.title");
+    private By contactUsHeader = By.cssSelector(".col-sm-8 .contact-form h2.title");
 
     private By nameInput = By.cssSelector("[data-qa='name']");
     private By emailInput = By.cssSelector("[data-qa='email']");
