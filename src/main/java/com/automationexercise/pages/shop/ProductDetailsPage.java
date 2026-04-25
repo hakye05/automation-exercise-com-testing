@@ -2,6 +2,7 @@ package com.automationexercise.pages.shop;
 
 import com.automationexercise.models.ProductDetails;
 import com.automationexercise.pages.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -23,16 +24,19 @@ public class ProductDetailsPage extends BasePage {
         super(driver);
     }
 
+    @Step("Change quantity of product to: {0}")
     public ProductDetailsPage changeProductQuantityBy(int amount) {
         type(productQuantityInput, String.valueOf(amount));
         return this;
     }
 
+    @Step("Click 'Add to cart' button")
     public ProductDetailsPage clickAddToCart() {
         click(addToCartButton);
         return this;
     }
 
+    @Step("Click 'View Cart' button within modal")
     public CartPage acceptViewCartModal() {
         waitForVisibilityOf(cartModal);
         clickAvoidingVignette(viewCartButton);
@@ -40,6 +44,7 @@ public class ProductDetailsPage extends BasePage {
     }
 
     // Getter Methods
+    @Step("Get product details")
     public ProductDetails getProductDetails() {
         return new ProductDetails(
                 getText(productName),

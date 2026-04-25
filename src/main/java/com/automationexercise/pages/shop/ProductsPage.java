@@ -2,6 +2,7 @@ package com.automationexercise.pages.shop;
 
 import com.automationexercise.models.ProductCardDetails;
 import com.automationexercise.pages.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,16 +31,19 @@ public class ProductsPage extends BasePage {
         super(driver);
     }
 
+    @Step("Enter search word: {0}")
     public ProductsPage enterSearchWord(String word) {
         type(searchProductBar, word);
         return this;
     }
 
+    @Step("Click search button")
     public ProductsPage clickSearchButton() {
         click(searchButton);
         return this;
     }
 
+    @Step("Click 'Add to Cart' button of product number: {0}")
     public ProductsPage clickAddToCart(int index) {
         List<WebElement> products = findAll(productCard);
         WebElement targetProduct = products.get(index);
@@ -50,6 +54,7 @@ public class ProductsPage extends BasePage {
         return this;
     }
 
+    @Step("Click 'Add to Cart' button of several products")
     public ProductsPage clickAddToCart(int... indices) {
         List<WebElement> products = findAll(productCard);
         int indicesLength = indices.length;
@@ -68,6 +73,7 @@ public class ProductsPage extends BasePage {
         return this;
     }
 
+    @Step("Click 'View Product' button of product number: {0}")
     public ProductDetailsPage clickViewProductDetails(int index) {
         List<WebElement> products = findAll(productCard);
         WebElement targetProduct = products.get(index);
@@ -78,12 +84,14 @@ public class ProductsPage extends BasePage {
         return new ProductDetailsPage(driver);
     }
 
+    @Step("Click 'Continue Shopping' button within modal")
     public ProductsPage dismissViewCartModal() {
         waitForVisibilityOf(continueModal);
         click(continueShoppingButton);
         return this;
     }
 
+    @Step("Click 'View Cart' button within modal")
     public CartPage acceptViewCartModal() {
         waitForVisibilityOf(continueModal);
         clickAvoidingVignette(viewCartButton);
@@ -91,6 +99,7 @@ public class ProductsPage extends BasePage {
     }
 
     // Getter Methods
+    @Step("Get product details of item number: {0}")
     public ProductCardDetails getProductCardDetails(int index) {
         List<WebElement> products = findAll(productCard);
         WebElement targetProduct = products.get(index);
@@ -100,6 +109,7 @@ public class ProductsPage extends BasePage {
         return new ProductCardDetails(name, price);
     }
 
+    @Step("Get product details of several items")
     public List<ProductCardDetails> getProductCardDetails(int... indices) {
         List<WebElement> products = findAll(productCard);
         List<ProductCardDetails> allProducts = new ArrayList<>();
@@ -114,6 +124,7 @@ public class ProductsPage extends BasePage {
         return allProducts;
     }
 
+    @Step("Get all product details")
     public List<ProductCardDetails> getAllProductCardDetails() {
         List<WebElement> products = findAll(productCard);
         List<ProductCardDetails> allProducts = new ArrayList<>();
@@ -127,6 +138,7 @@ public class ProductsPage extends BasePage {
         return allProducts;
     }
 
+    @Step("Get all product names")
     public List<String> getAllProductNames() {
         List<WebElement> products = findAll(productCard);
         List<String> allProductNames = new ArrayList<>();
@@ -139,6 +151,7 @@ public class ProductsPage extends BasePage {
         return allProductNames;
     }
 
+    @Step("Get products page title")
     public String getProductsHeader() {
         return getText(productsHeader);
     }

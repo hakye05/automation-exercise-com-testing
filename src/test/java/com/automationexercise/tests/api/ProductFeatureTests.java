@@ -1,6 +1,7 @@
 package com.automationexercise.tests.api;
 
 import com.automationexercise.base.api.BaseTestApiProduct;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -10,9 +11,14 @@ import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.not;
 
+@Epic("API Testing")
+@Feature("Product Features")
 public class ProductFeatureTests extends BaseTestApiProduct {
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Products list fetching")
+    @Description("Verify that we get products list and each item is valid")
     public void shouldGetAllProducts() {
         Response response = productApiService.getAllProductsList();
 
@@ -26,6 +32,9 @@ public class ProductFeatureTests extends BaseTestApiProduct {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Fetching list of product brands")
+    @Description("Verify that we get brands of products")
     public void shouldGetAllProductBrands() {
         Response response = productApiService.getAllProductsBrandList();
 
@@ -38,6 +47,9 @@ public class ProductFeatureTests extends BaseTestApiProduct {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Product search with search word")
+    @Description("Verify that search feature returns the list of products that relate to search word")
     public void shouldGetSearchedProduct() {
         String searchString = "top";
 
@@ -51,6 +63,9 @@ public class ProductFeatureTests extends BaseTestApiProduct {
     }
 
     @Test
+    @Severity(SeverityLevel.MINOR)
+    @Story("Product search without any search words")
+    @Description("Verify that search feature requests the search word when it is missing")
     public void shouldFailSearchOfProductsWithoutKeyword() {
         Response response = productApiService.searchProductWithoutParam();
 

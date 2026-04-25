@@ -2,6 +2,7 @@ package com.automationexercise.pages.auth;
 
 import com.automationexercise.pages.HomePage;
 import com.automationexercise.pages.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -14,11 +15,13 @@ public class AccountCreatedPage extends BasePage {
         super(driver);
     }
 
+    @Step("Click 'Continue' button")
     public HomePage clickContinue() {
         click(continueButton);
         return new HomePage(driver);
     }
 
+    @Step("Get created account page title")
     public String getAccountCreatedHeader() {
         return getText(accountCreatedHeader);
     }

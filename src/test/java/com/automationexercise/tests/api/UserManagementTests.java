@@ -4,17 +4,23 @@ import com.automationexercise.base.api.BaseTestApiUser;
 import com.automationexercise.models.UserAuthData;
 import com.automationexercise.models.UserData;
 import com.automationexercise.utils.DataGenerator;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 
+@Epic("API Testing")
+@Feature("User Management")
 public class UserManagementTests extends BaseTestApiUser {
 
     private UserData user;
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("User creation with valid data")
+    @Description("Verify that a user can create an account with registration data.")
     public void shouldCreateUser() {
         user = DataGenerator.createUser();
 
@@ -27,6 +33,9 @@ public class UserManagementTests extends BaseTestApiUser {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("User deletion")
+    @Description("Verify that a user can delete account with email.")
     public void shouldDeleteUser() {
         user = DataGenerator.createUser();
         userApiService.createUser(user);
@@ -42,6 +51,9 @@ public class UserManagementTests extends BaseTestApiUser {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("User login verification with valid data")
+    @Description("Verify that user is able to login with correct authentication credentials.")
     public void shouldVerifyLoginUserWithCorrectCredentials() {
         user = DataGenerator.createUser();
         userApiService.createUser(user);
@@ -55,6 +67,9 @@ public class UserManagementTests extends BaseTestApiUser {
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
+    @Story("User login verification fail without email")
+    @Description("Verify that a user can not login without providing email.")
     public void shouldFailToLoginUserWithoutEmail() {
         user = DataGenerator.createUser();
 
@@ -69,6 +84,9 @@ public class UserManagementTests extends BaseTestApiUser {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("User login verification fail with invalid password")
+    @Description("Verify that a user can not login with incorrect password.")
     public void shouldFailToLoginUserWithInvalidPassword() {
         user = DataGenerator.createUser();
         userApiService.createUser(user);
@@ -82,6 +100,9 @@ public class UserManagementTests extends BaseTestApiUser {
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
+    @Story("User details fetching using email")
+    @Description("Verify the method that gets the user's data using email.")
     public void shouldGetUserDetails() {
         user = DataGenerator.createUser();
         userApiService.createUser(user);

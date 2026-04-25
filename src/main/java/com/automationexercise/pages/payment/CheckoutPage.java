@@ -2,6 +2,7 @@ package com.automationexercise.pages.payment;
 
 import com.automationexercise.models.AddressDetails;
 import com.automationexercise.pages.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,22 +27,26 @@ public class CheckoutPage extends BasePage {
         super(driver);
     }
 
+    @Step("Enter optional order message")
     public CheckoutPage enterOrderMessage(String text) {
         type(orderMessageField, text);
         return this;
     }
 
+    @Step("Click 'Place Order' button")
     public PaymentPage clickPlaceOrder() {
         click(orderButton);
         return new PaymentPage(driver);
     }
 
     // Getter Methods
+    @Step("Get delivery address fields from table")
     public AddressDetails getDeliveryAddress() {
         WebElement deliveryBox = find(deliveryAddressBox);
         return getAddressDetailsFrom(deliveryBox);
     }
 
+    @Step("Get invoice address fields from table")
     public AddressDetails getInvoiceAddress() {
         WebElement invoiceBox = find(invoiceAddressBox);
         return getAddressDetailsFrom(invoiceBox);

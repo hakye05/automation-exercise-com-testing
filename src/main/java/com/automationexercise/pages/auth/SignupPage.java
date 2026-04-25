@@ -2,6 +2,7 @@ package com.automationexercise.pages.auth;
 
 import com.automationexercise.models.UserData;
 import com.automationexercise.pages.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -38,6 +39,7 @@ public class SignupPage extends BasePage {
         super(driver);
     }
 
+    @Step("Fill main signup form")
     public AccountCreatedPage signupUser(UserData user) {
         click(genderRadio);
         type(passwordInput, user.password());
@@ -61,6 +63,7 @@ public class SignupPage extends BasePage {
     }
 
     // Getter Methods
+    @Step("Get pre-filled values from name and email fields")
     public Map<String, String> getPrefilledSignupFields() {
         return Map.of(
                 "name", getText(nameInput),
@@ -68,6 +71,7 @@ public class SignupPage extends BasePage {
         );
     }
 
+    @Step("Get signup page form title")
     public String getSignupHeader() {
         return getText(signupHeader);
     }

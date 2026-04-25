@@ -2,6 +2,7 @@ package com.automationexercise.pages.payment;
 
 import com.automationexercise.pages.HomePage;
 import com.automationexercise.pages.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -21,12 +22,14 @@ public class PaymentSuccessPage extends BasePage {
         return new HomePage(driver);
     }
 
+    @Step("Click 'Download Invoice' button")
     public PaymentSuccessPage clickDownloadInvoice() {
         click(downloadInvoiceButton);
         return this;
     }
 
     // Getter Methods
+    @Step("Get payment success page title")
     public String getOrderPlacedHeader() {
         return getText(orderPlacedHeader);
     }

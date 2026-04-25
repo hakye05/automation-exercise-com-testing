@@ -8,6 +8,7 @@ import com.automationexercise.pages.info.TestCasesPage;
 import com.automationexercise.pages.shop.CartPage;
 import com.automationexercise.pages.shop.ProductDetailsPage;
 import com.automationexercise.pages.shop.ProductsPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,41 +40,49 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
+    @Step("Click 'Signup / Login' button in navbar")
     public LoginPage clickLoginLink() {
         clickAvoidingVignette(loginLink);
         return new LoginPage(driver);
     }
 
+    @Step("Click 'Delete Account' button in navbar")
     public LoginPage clickLogoutLink() {
         clickAvoidingVignette(logoutLink);
         return new LoginPage(driver);
     }
 
+    @Step("Click 'Logout' button in navbar")
     public AccountDeletedPage clickDeleteAccountLink() {
         clickAvoidingVignette(deleteAccountLink);
         return new AccountDeletedPage(driver);
     }
 
+    @Step("Click 'Products' button in navbar")
     public ProductsPage clickProductsLink() {
         clickAvoidingVignette(productsLink);
         return new ProductsPage(driver);
     }
 
+    @Step("Click 'Cart' button in navbar")
     public CartPage clickCartLink() {
         clickAvoidingVignette(cartLink);
         return new CartPage(driver);
     }
 
+    @Step("Click 'Test Cases' button in navbar")
     public TestCasesPage clickTestCasesLink() {
         clickAvoidingVignette(testCasesLink);
         return new TestCasesPage(driver);
     }
 
+    @Step("Click 'Contact us' button in navbar")
     public ContactUsPage clickContactUsLink() {
         clickAvoidingVignette(contactUsLink);
         return new ContactUsPage(driver);
     }
 
+    @Step("Click 'Add to Cart' button of product number: {0}")
     public HomePage clickAddToCart(int index) {
         List<WebElement> products = findAll(productCard);
         WebElement targetProduct = products.get(index);
@@ -84,6 +93,7 @@ public class HomePage extends BasePage {
         return this;
     }
 
+    @Step("Click 'View Product' button of product number: {0}")
     public ProductDetailsPage clickViewProduct(int index) {
         List<WebElement> products = findAll(productCard);
         WebElement targetProduct = products.get(index);
@@ -94,6 +104,7 @@ public class HomePage extends BasePage {
         return new ProductDetailsPage(driver);
     }
 
+    @Step("Click 'View Cart' button within modal")
     public CartPage acceptViewCartModal() {
         waitForVisibilityOf(continueModal);
         clickAvoidingVignette(viewCartButton);
@@ -101,10 +112,12 @@ public class HomePage extends BasePage {
     }
 
     // Getter Methods
+    @Step("Get logged in as user header")
     public String getLoggedInAsUser() {
         return getText(loggedInAsHeader);
     }
 
+    @Step("Get home page title")
     public String getHomeHeader() {
         return getText(homeHeader);
     }

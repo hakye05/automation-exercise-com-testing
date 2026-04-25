@@ -1,6 +1,8 @@
 package com.automationexercise.pages.auth;
 
+import com.automationexercise.pages.HomePage;
 import com.automationexercise.pages.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -13,11 +15,13 @@ public class AccountDeletedPage extends BasePage {
         super(driver);
     }
 
-    public LoginPage clickContinue() {
+    @Step("Click 'Continue' button")
+    public HomePage clickContinue() {
         click(continueButton);
-        return new LoginPage(driver);
+        return new HomePage(driver);
     }
 
+    @Step("Get deleted account page title")
     public String getAccountDeletedHeader() {
         return getText(accountDeletedHeader);
     }
