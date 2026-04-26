@@ -14,6 +14,7 @@ import java.util.List;
 
 public class CartPage extends BasePage {
 
+    private By cartHeader = By.cssSelector(".breadcrumb .active");
     private By emptyCartHeader = By.id("empty_cart");
 
     private By cartRow = By.cssSelector("#cart_info_table tbody tr");
@@ -25,7 +26,7 @@ public class CartPage extends BasePage {
 
     private By checkoutButton = By.cssSelector(".check_out");
     private By checkoutModal = By.id("checkoutModal");
-    private By registerLoginButton = By.cssSelector("#checkoutModal .modal-body a[href='/logout']");
+    private By registerLoginButton = By.cssSelector("#checkoutModal .modal-body a[href='/login']");
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -54,14 +55,20 @@ public class CartPage extends BasePage {
 
     @Step("Click 'Proceed To Checkout' button")
     public CheckoutPage clickCheckoutButton() {
-        click(checkoutButton);
+        clickAvoidingVignette(checkoutButton);
         return new CheckoutPage(driver);
+    }
+
+    @Step("Click 'Proceed To Checkout' button as guest user")
+    public CartPage clickCheckoutButtonAsGuest() {
+        click(checkoutButton);
+        return this;
     }
 
     @Step("Click 'Register / Login' button")
     public LoginPage clickRegisterWithinModal() {
         waitForVisibilityOf(checkoutModal);
-        click(registerLoginButton);
+        clickAvoidingVignette(registerLoginButton);
         return new LoginPage(driver);
     }
 
@@ -104,5 +111,10 @@ public class CartPage extends BasePage {
     @Step("Get empty cart title")
     public String getEmptyCartHeader() {
         return getText(emptyCartHeader);
+    }
+
+    @Step("Get cart page header")
+    public String getCartHeader() {
+        return getText(cartHeader);
     }
 }
