@@ -7,6 +7,9 @@ import com.automationexercise.models.UserData;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Utility class for generating randomized test data.
+ * */
 public class DataGenerator {
 
     private static String getRandomUUID() {
@@ -17,7 +20,12 @@ public class DataGenerator {
         return ThreadLocalRandom.current().nextInt(min, max);
     }
 
-    public static UserData createUser() {
+    /**
+     * Generates a new {@link UserData} object with unique email and phone number.
+     * Each execution uses a unique suffix to prevent identical data across tests.
+     * @return a populated {@link UserData} instance
+     * */
+    public static UserData generateUser() {
         String suffix = getRandomUUID();
         return new UserData(
                 "John", "john" + suffix + "@example.com",
@@ -29,6 +37,12 @@ public class DataGenerator {
         );
     }
 
+    /**
+     * Generates a new {@link PaymentDetails} object based on the provided user.
+     * @param firstName a string of user's first name
+     * @param lastName a string of user's last name
+     * @return a populated {@link PaymentDetails} instance
+     * */
     public static PaymentDetails generatePaymentData(String firstName, String lastName) {
         return new PaymentDetails(
                 lastName + firstName,
@@ -39,6 +53,11 @@ public class DataGenerator {
         );
     }
 
+    /**
+     * Generates a new {@link AddressDetails} object based on the provided user.
+     * @param user an existing {@link UserData} instance
+     * @return a populated {@link AddressDetails} instance
+     * */
     public static AddressDetails generateAddressData(UserData user) {
         return new AddressDetails(
                 user.genderTitle() + ". " + user.firstName() + " " + user.lastName(),

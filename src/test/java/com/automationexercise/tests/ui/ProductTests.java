@@ -8,10 +8,7 @@ import com.automationexercise.pages.HomePage;
 import com.automationexercise.pages.shop.ProductDetailsPage;
 import com.automationexercise.pages.shop.ProductsPage;
 import com.automationexercise.utils.DataConverter;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -25,6 +22,7 @@ import java.util.Map;
 public class ProductTests extends BaseTestUi {
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Search Products")
     @Description("Verify search engine returns products that are relevant to user's search input.")
     public void searchProduct() {
@@ -33,12 +31,12 @@ public class ProductTests extends BaseTestUi {
 
         ProductsPage productsPage = new HomePage(getDriver())
                 .clickProductsLink();
-        Assert.assertEquals(productsPage.getProductsHeader(), "ALL PRODUCTS", "Expected products header to be displayed");
+        Assert.assertEquals(productsPage.getProductsHeader(), ProductsPage.PRODUCTS_ALL, "Expected products header to be displayed");
 
         productsPage = productsPage
                 .enterSearchWord(searchWord)
                 .clickSearchButton();
-        Assert.assertEquals(productsPage.getProductsHeader(), "SEARCHED PRODUCTS", "Expected searched products header to be displayed");
+        Assert.assertEquals(productsPage.getProductsHeader(), ProductsPage.PRODUCTS_SEARCHED, "Expected searched products header to be displayed");
 
         List<String> searchedProductNames = productsPage.getAllProductNames();
         Response response = new ProductApiService().searchProduct(searchWord);
@@ -63,6 +61,7 @@ public class ProductTests extends BaseTestUi {
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     @Story("Product Card Integrity")
     @Description("Verify that product list loads correctly and that product details page displays product information accurately.")
     public void checkProductsAndProductDetails() {
@@ -70,7 +69,7 @@ public class ProductTests extends BaseTestUi {
 
         ProductsPage productsPage = new HomePage(getDriver())
                 .clickProductsLink();
-        Assert.assertEquals(productsPage.getProductsHeader(), "ALL PRODUCTS", "Expected products header to be displayed");
+        Assert.assertEquals(productsPage.getProductsHeader(), ProductsPage.PRODUCTS_ALL, "Expected products header to be displayed");
         Assert.assertFalse(productsPage.getAllProductNames().isEmpty(), "Expected products list not to be empty");
 
         ProductCardDetails productCardDetails = productsPage.getProductCardDetails(0);

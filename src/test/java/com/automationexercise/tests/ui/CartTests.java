@@ -8,10 +8,7 @@ import com.automationexercise.pages.shop.CartPage;
 import com.automationexercise.pages.shop.ProductDetailsPage;
 import com.automationexercise.pages.shop.ProductsPage;
 import com.automationexercise.utils.DataConverter;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -24,6 +21,7 @@ import java.util.List;
 public class CartTests extends BaseTestUi {
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Add Item to Cart")
     @Description("Verify multiple products addition to cart and their correctness within the cart.")
     public void addProductsToCartAndVerify() {
@@ -62,6 +60,7 @@ public class CartTests extends BaseTestUi {
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     @Story("Change Cart Item Quantity")
     @Description("Verify that quantity change is correctly passed from product details page to cart page.")
     public void checkAddedProductQuantity() {
@@ -80,6 +79,7 @@ public class CartTests extends BaseTestUi {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Remove Cart Items")
     @Description("Verify the removal of added items from cart.")
     public void removeProductsFromCart() {
@@ -88,12 +88,12 @@ public class CartTests extends BaseTestUi {
         CartPage cartPage = new HomePage(getDriver())
                 .clickAddToCart(0)
                 .acceptViewCartModal();
-        Assert.assertEquals(cartPage.getCartHeader(), "Shopping Cart", "Expected cart header to be displayed");
+        Assert.assertEquals(cartPage.getCartHeader(), CartPage.CART_HEADER, "Expected cart header to be displayed");
 
         String emptyCartHeader = cartPage
                 .clickDeleteCartItem(0)
                 .waitForCartClear()
                 .getEmptyCartHeader();
-        Assert.assertTrue(emptyCartHeader.contains("Cart is empty!"), "Expected empty cart header to be displayed");
+        Assert.assertTrue(emptyCartHeader.contains(CartPage.CART_EMPTY), "Expected empty cart header to be displayed");
     }
 }

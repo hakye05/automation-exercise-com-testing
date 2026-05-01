@@ -10,6 +10,8 @@ import java.util.Map;
 
 public class SignupPage extends BasePage {
 
+    public static final String SIGNUP_HEADER = "ENTER ACCOUNT INFORMATION";
+
     private By signupHeader = By.cssSelector(".login-form h2.title");
 
     private By genderRadio = By.id("id_gender1");
@@ -46,6 +48,7 @@ public class SignupPage extends BasePage {
         selectByTextOf(birthDaySelector, user.birthDate());
         selectByTextOf(birthMonthSelector, user.birthMonth());
         selectByTextOf(birthYearSelector, user.birthYear());
+        scrollTo(newsletterCheckbox);
         click(newsletterCheckbox);
         click(offerOptionCheckbox);
         type(firstNameInput, user.firstName());
@@ -53,11 +56,13 @@ public class SignupPage extends BasePage {
         type(companyInput, user.company());
         type(firstAddressInput, user.address1());
         type(secondAddressInput, user.address2());
+        scrollTo(countrySelector);
         selectByTextOf(countrySelector, user.country());
         type(stateInput, user.state());
         type(cityInput, user.city());
         type(zipcodeInput, user.zipcode());
         type(mobileNumberInput, user.mobileNumber());
+        scrollTo(createAccountButton);
         click(createAccountButton);
         return new AccountCreatedPage(driver);
     }
@@ -66,8 +71,8 @@ public class SignupPage extends BasePage {
     @Step("Get pre-filled values from name and email fields")
     public Map<String, String> getPrefilledSignupFields() {
         return Map.of(
-                "name", getText(nameInput),
-                "email", getText(emailInput)
+                "name", getTextFromField(nameInput),
+                "email", getTextFromField(emailInput)
         );
     }
 

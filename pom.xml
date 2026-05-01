@@ -26,8 +26,8 @@
         <aspectj.version>1.9.22.1</aspectj.version>
 
         <!--Suit-Files-->
-        <uiSuiteXmlFile>ui-suite.xml</uiSuiteXmlFile>
-        <apiSuiteXmlFile>api-suite.xml</apiSuiteXmlFile>
+        <uiSuiteXmlFile>suite-ui.xml</uiSuiteXmlFile>
+        <apiSuiteXmlFile>suite-api.xml</apiSuiteXmlFile>
     </properties>
 
     <dependencies>

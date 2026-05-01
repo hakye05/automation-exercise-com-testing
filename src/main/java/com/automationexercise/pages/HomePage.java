@@ -17,6 +17,9 @@ import java.util.List;
 
 public class HomePage extends BasePage {
 
+    public static final String HOME_HEADER = "Full-Fledged practice website for Automation Engineers";
+    public static final String LOGGED_IN_AS = "Logged in as ";
+
     private By homeHeader = By.cssSelector(".item.active h2");
     private By loggedInAsHeader = By.cssSelector(".shop-menu a:has(.fa-user)");
 
@@ -100,7 +103,7 @@ public class HomePage extends BasePage {
 
         WebElement viewDetailsButton = findNested(targetProduct, viewProductButton);
         scrollToElement(viewDetailsButton);
-        click(viewDetailsButton);
+        clickAvoidingVignette(viewDetailsButton);
         return new ProductDetailsPage(driver);
     }
 

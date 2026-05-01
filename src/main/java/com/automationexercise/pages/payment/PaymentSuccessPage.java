@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 
 public class PaymentSuccessPage extends BasePage {
 
+    public static final String ORDER_PLACED = "ORDER PLACED!";
+
     private By orderPlacedHeader = By.cssSelector("[data-qa='order-placed']");
 
     private By downloadInvoiceButton = By.cssSelector("a[href*='/download_invoice/']");

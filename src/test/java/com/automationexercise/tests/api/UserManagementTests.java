@@ -22,7 +22,7 @@ public class UserManagementTests extends BaseTestApiUser {
     @Story("User creation with valid data")
     @Description("Verify that a user can create an account with registration data.")
     public void shouldCreateUser() {
-        user = DataGenerator.createUser();
+        user = DataGenerator.generateUser();
 
         Response response = userApiService.createUser(user);
 
@@ -37,7 +37,7 @@ public class UserManagementTests extends BaseTestApiUser {
     @Story("User deletion")
     @Description("Verify that a user can delete account with email.")
     public void shouldDeleteUser() {
-        user = DataGenerator.createUser();
+        user = DataGenerator.generateUser();
         userApiService.createUser(user);
 
         Response response = userApiService.deleteUser(new UserAuthData(user.email(), user.password()));
@@ -55,7 +55,7 @@ public class UserManagementTests extends BaseTestApiUser {
     @Story("User login verification with valid data")
     @Description("Verify that user is able to login with correct authentication credentials.")
     public void shouldVerifyLoginUserWithCorrectCredentials() {
-        user = DataGenerator.createUser();
+        user = DataGenerator.generateUser();
         userApiService.createUser(user);
 
         Response response = userApiService.verifyLogin(new UserAuthData(user.email(), user.password()));
@@ -71,7 +71,7 @@ public class UserManagementTests extends BaseTestApiUser {
     @Story("User login verification fail without email")
     @Description("Verify that a user can not login without providing email.")
     public void shouldFailToLoginUserWithoutEmail() {
-        user = DataGenerator.createUser();
+        user = DataGenerator.generateUser();
 
         Response response = userApiService.verifyLogin(new UserAuthData("", user.password()));
 
@@ -88,7 +88,7 @@ public class UserManagementTests extends BaseTestApiUser {
     @Story("User login verification fail with invalid password")
     @Description("Verify that a user can not login with incorrect password.")
     public void shouldFailToLoginUserWithInvalidPassword() {
-        user = DataGenerator.createUser();
+        user = DataGenerator.generateUser();
         userApiService.createUser(user);
 
         Response response = userApiService.verifyLogin(new UserAuthData(user.email(), "invalidPassword123"));
@@ -104,7 +104,7 @@ public class UserManagementTests extends BaseTestApiUser {
     @Story("User details fetching using email")
     @Description("Verify the method that gets the user's data using email.")
     public void shouldGetUserDetails() {
-        user = DataGenerator.createUser();
+        user = DataGenerator.generateUser();
         userApiService.createUser(user);
 
         Response response = userApiService.getUserDetails(user.email());

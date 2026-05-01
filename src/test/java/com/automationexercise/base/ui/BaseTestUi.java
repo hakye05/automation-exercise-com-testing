@@ -1,6 +1,6 @@
 package com.automationexercise.base.ui;
 
-import com.automationexercise.config.ConfigReader;
+import com.automationexercise.utils.ConfigReader;
 import com.automationexercise.drivers.DriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -21,6 +21,10 @@ public class BaseTestUi {
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
         DriverFactory.quitDriver();
+    }
+
+    public void openPage() {
+        getDriver().get(ConfigReader.getProperty("ui.url"));
     }
 
     public void openPage(String path) {

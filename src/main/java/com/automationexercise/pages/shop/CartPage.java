@@ -14,6 +14,9 @@ import java.util.List;
 
 public class CartPage extends BasePage {
 
+    public static final String CART_HEADER = "Shopping Cart";
+    public static final String CART_EMPTY = "Cart is empty!";
+
     private By cartHeader = By.cssSelector(".breadcrumb .active");
     private By emptyCartHeader = By.id("empty_cart");
 

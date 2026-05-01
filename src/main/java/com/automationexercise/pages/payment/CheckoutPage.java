@@ -35,7 +35,7 @@ public class CheckoutPage extends BasePage {
 
     @Step("Click 'Place Order' button")
     public PaymentPage clickPlaceOrder() {
-        click(orderButton);
+        clickAvoidingVignette(orderButton);
         return new PaymentPage(driver);
     }
 

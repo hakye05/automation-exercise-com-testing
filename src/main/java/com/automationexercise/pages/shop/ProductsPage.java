@@ -12,6 +12,9 @@ import java.util.List;
 
 public class ProductsPage extends BasePage {
 
+    public static final String PRODUCTS_ALL = "ALL PRODUCTS";
+    public static final String PRODUCTS_SEARCHED = "SEARCHED PRODUCTS";
+
     private By productsHeader = By.cssSelector(".features_items h2.title");
 
     private By searchProductBar = By.id("search_product");
@@ -80,7 +83,7 @@ public class ProductsPage extends BasePage {
 
         WebElement viewDetailsButton = findNested(targetProduct, viewProductButton);
         scrollToElement(viewDetailsButton);
-        click(viewDetailsButton);
+        clickAvoidingVignette(viewDetailsButton);
         return new ProductDetailsPage(driver);
     }
 

@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 
 public class AccountCreatedPage extends BasePage {
 
+    public static final String ACCOUNT_CREATED = "ACCOUNT CREATED!";
+
     private By accountCreatedHeader = By.cssSelector("h2[data-qa='account-created']");
     private By continueButton = By.cssSelector("a[data-qa='continue-button']");
 
@@ -17,7 +19,7 @@ public class AccountCreatedPage extends BasePage {
 
     @Step("Click 'Continue' button")
     public HomePage clickContinue() {
-        click(continueButton);
+        clickAvoidingVignette(continueButton);
         return new HomePage(driver);
     }
 

@@ -7,6 +7,9 @@ import org.openqa.selenium.WebDriver;
 
 public class ContactUsPage extends BasePage {
 
+    public static final String CONTACT_US_HEADER = "GET IN TOUCH";
+    public static final String CONTACT_SUCCESSFUL = "Success! Your details have been submitted successfully.";
+
     private By contactUsHeader = By.cssSelector(".col-sm-8 .contact-form h2.title");
 
     private By nameInput = By.cssSelector("[data-qa='name']");

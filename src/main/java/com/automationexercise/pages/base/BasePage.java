@@ -1,5 +1,6 @@
 package com.automationexercise.pages.base;
 
+import com.automationexercise.utils.ConfigReader;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -17,7 +18,7 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(ConfigReader.getLongProperty("timeout.seconds")));
     }
 
     protected void click(By locator) {
@@ -29,8 +30,13 @@ public class BasePage {
     }
 
     protected void clickAvoidingVignette(By locator) {
-        String destination = driver.findElement(locator).getAttribute("href");
-        click(locator);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        clickAvoidingVignette(element);
+    }
+
+    protected void clickAvoidingVignette(WebElement element) {
+        String destination = element.getAttribute("href");
+        element.click();
         if (driver.getCurrentUrl().contains("#google_vignette") && destination != null) {
             driver.get(destination);
         }
@@ -48,6 +54,10 @@ public class BasePage {
 
     protected String getText(WebElement element) {
         return wait.until(ExpectedConditions.visibilityOf(element)).getText();
+    }
+
+    protected String getTextFromField(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).getAttribute("value");
     }
 
     protected void selectByTextOf(By locator, String text) {
@@ -94,8 +104,9 @@ public class BasePage {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
-    protected void scrollToElement(By locator) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", locator);
+    protected void scrollTo(By locator) {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
     }
 
     protected void scrollToElement(WebElement element) {

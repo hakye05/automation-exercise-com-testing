@@ -8,6 +8,11 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
 
+    public static final String LOGIN_HEADER = "Login to your account";
+    public static final String SIGNUP_HEADER = "New User Signup!";
+    public static final String CREDENTIALS_INCORRECT = "Your email or password is incorrect!";
+    public static final String EMAIL_IN_USE = "Email Address already exist!";
+
     private By loginHeader = By.cssSelector(".login-form h2");
     private By signupHeader = By.cssSelector(".signup-form h2");
 
