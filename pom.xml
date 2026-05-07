@@ -18,6 +18,7 @@
         <restassured.version>6.0.0</restassured.version>
         <commons-codec.version>1.21.0</commons-codec.version>
         <slf4j.version>2.0.16</slf4j.version>
+        <logback.version>1.5.32</logback.version>
         <jackson.version>2.21.2</jackson.version>
 
         <allure.version>2.29.1</allure.version>
@@ -25,9 +26,13 @@
         <maven-surefire-plugin.version>3.5.0</maven-surefire-plugin.version>
         <aspectj.version>1.9.22.1</aspectj.version>
 
-        <!--Suit-Files-->
+        <!--Suite-Files-->
         <uiSuiteXmlFile>suite-ui.xml</uiSuiteXmlFile>
+        <uiParallelSuiteXmlFile>suite-ui-parallel.xml</uiParallelSuiteXmlFile>
         <apiSuiteXmlFile>suite-api.xml</apiSuiteXmlFile>
+
+        <!--Default-Suite-->
+        <suiteXmlFile>${uiSuiteXmlFile}</suiteXmlFile>
     </properties>
 
     <dependencies>
@@ -84,12 +89,12 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--SLF4J-->
+        <!--Logback-Classic-->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>test</scope>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <!--AspectJ-->
@@ -119,8 +124,7 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${uiSuiteXmlFile}</suiteXmlFile>
-                        <suiteXmlFile>${apiSuiteXmlFile}</suiteXmlFile>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
@@ -148,4 +152,27 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>ui-tests</id>
+            <properties>
+                <suiteXmlFile>${uiSuiteXmlFile}</suiteXmlFile>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>api-tests</id>
+            <properties>
+                <suiteXmlFile>${apiSuiteXmlFile}</suiteXmlFile>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>ui-parallel-tests</id>
+            <properties>
+                <suiteXmlFile>${uiParallelSuiteXmlFile}</suiteXmlFile>
+            </properties>
+        </profile>
+    </profiles>
 </project>

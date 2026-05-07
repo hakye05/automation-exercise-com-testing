@@ -36,25 +36,35 @@ public class UserAccountTests extends BaseTestUiUser {
         Assert.assertEquals(signupPage.getSignupHeader(), SignupPage.SIGNUP_HEADER, "Expected signup header to be displayed");
 
         Map<String, String> prefilledInfo = signupPage.getPrefilledSignupFields();
-        Assert.assertEquals(prefilledInfo.get("name"), user.name(), "Expected prefilled name to match user name");
-        Assert.assertEquals(prefilledInfo.get("email"), user.email(), "Expected prefilled email to match user email");
+        Allure.step("Check signup form's prefilled fields", () -> {
+            Assert.assertEquals(prefilledInfo.get("name"), user.name(), "Expected prefilled name to match user name");
+            Assert.assertEquals(prefilledInfo.get("email"), user.email(), "Expected prefilled email to match user email");
+        });
 
         AccountCreatedPage accountCreatedPage = signupPage
                 .signupUser(user);
-        Assert.assertEquals(accountCreatedPage.getAccountCreatedHeader(), AccountCreatedPage.ACCOUNT_CREATED, "Expected account created header to be displayed");
+        Allure.step("Verify account created header is displayed", () -> {
+            Assert.assertEquals(accountCreatedPage.getAccountCreatedHeader(), AccountCreatedPage.ACCOUNT_CREATED, "Expected account created header to be displayed");
+        });
 
         HomePage homePage = accountCreatedPage
                 .clickContinue();
-        Assert.assertEquals(homePage.getLoggedInAsUser(), HomePage.LOGGED_IN_AS + user.name(), "Expected header to display that user is logged in");
+        Allure.step("Verify logged in user header is displayed", () -> {
+            Assert.assertEquals(homePage.getLoggedInAsUser(), HomePage.LOGGED_IN_AS + user.name(), "Expected header to display that user is logged in");
+        });
 
         AccountDeletedPage accountDeletedPage = homePage
                 .clickDeleteAccountLink();
-        Assert.assertEquals(accountDeletedPage.getAccountDeletedHeader(), AccountDeletedPage.ACCOUNT_DELETED, "Expected account deleted header to be displayed");
+        Allure.step("Verify account deleted header is displayed", () -> {
+            Assert.assertEquals(accountDeletedPage.getAccountDeletedHeader(), AccountDeletedPage.ACCOUNT_DELETED, "Expected account deleted header to be displayed");
+        });
 
         String homeHeaderText = accountDeletedPage
                 .clickContinue()
                 .getHomeHeader();
-        Assert.assertEquals(homeHeaderText, HomePage.HOME_HEADER, "Expected to see a home page title");
+        Allure.step("Verify home page header is displayed", () -> {
+            Assert.assertEquals(homeHeaderText, HomePage.HOME_HEADER, "Expected to see a home page title");
+        });
         user = null;
     }
 
@@ -76,7 +86,9 @@ public class UserAccountTests extends BaseTestUiUser {
                 .enterLoginPassword(user.password())
                 .clickLogin()
                 .getLoggedInAsUser();
-        Assert.assertEquals(loggedInAsUserText, HomePage.LOGGED_IN_AS + user.name(), "Expected header to display that user is logged in");
+        Allure.step("Verify logged in user header is displayed", () -> {
+            Assert.assertEquals(loggedInAsUserText, HomePage.LOGGED_IN_AS + user.name(), "Expected header to display that user is logged in");
+        });
     }
 
     @Test
@@ -97,7 +109,9 @@ public class UserAccountTests extends BaseTestUiUser {
                 .enterLoginPassword("incorrect123")
                 .clickLoginExpectingError()
                 .getIncorrectCredentialsMessage();
-        Assert.assertEquals(incorrectLoginMessage, LoginPage.CREDENTIALS_INCORRECT, "Expected incorrect credentials message to be displayed");
+        Allure.step("Verify incorrect credentials message is displayed", () -> {
+            Assert.assertEquals(incorrectLoginMessage, LoginPage.CREDENTIALS_INCORRECT, "Expected incorrect credentials message to be displayed");
+        });
     }
 
     @Test
@@ -117,12 +131,16 @@ public class UserAccountTests extends BaseTestUiUser {
                 .enterLoginEmail(user.email())
                 .enterLoginPassword(user.password())
                 .clickLogin();
-        Assert.assertEquals(homePage.getLoggedInAsUser(), HomePage.LOGGED_IN_AS + user.name(), "Expected header to display that user is logged in");
+        Allure.step("Verify logged in user header is displayed", () -> {
+            Assert.assertEquals(homePage.getLoggedInAsUser(), HomePage.LOGGED_IN_AS + user.name(), "Expected header to display that user is logged in");
+        });
 
         String loginHeaderText = homePage
                 .clickLogoutLink()
                 .getLoginHeader();
-        Assert.assertEquals(loginHeaderText, LoginPage.LOGIN_HEADER, "Expected login header to be displayed");
+        Allure.step("Verify login form header is displayed", () -> {
+            Assert.assertEquals(loginHeaderText, LoginPage.LOGIN_HEADER, "Expected login header to be displayed");
+        });
     }
 
     @Test
@@ -143,6 +161,8 @@ public class UserAccountTests extends BaseTestUiUser {
                 .enterSignupEmail(user.email())
                 .clickSignupExpectingError()
                 .getEmailInUseMessage();
-        Assert.assertEquals(emailInUseText, LoginPage.EMAIL_IN_USE, "Expected email in use message to be displayed");
+        Allure.step("Verify email in use message is displayed", () -> {
+            Assert.assertEquals(emailInUseText, LoginPage.EMAIL_IN_USE, "Expected email in use message to be displayed");
+        });
     }
 }

@@ -35,6 +35,8 @@ public class ContactUsTests extends BaseTestUi {
                 .clickSubmit()
                 .acceptSubmitAlert()
                 .getContactUsSuccessMessage();
-        Assert.assertEquals(successMessageText, ContactUsPage.CONTACT_SUCCESSFUL, "The contact success message was not displayed");
+        Allure.step("Verify contact success message is displayed", () -> {
+            Assert.assertEquals(successMessageText, ContactUsPage.CONTACT_SUCCESSFUL, "The contact success message was not displayed");
+        });
     }
 }

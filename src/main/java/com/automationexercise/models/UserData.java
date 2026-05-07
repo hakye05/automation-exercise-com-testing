@@ -23,4 +23,26 @@ public record UserData(
         String zipcode,
         @JsonProperty("mobile_number")String mobileNumber
 ) {
+    @Override
+    public String toString() {
+        return "UserData{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='[PROTECTED]'" +
+                ", genderTitle='" + genderTitle + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", birthMonth='" + birthMonth + '\'' +
+                ", birthYear='" + birthYear + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", company='" + company + '\'' +
+                ", address1='" + address1 + '\'' +
+                ", address2='" + address2 + '\'' +
+                ", country='" + country + '\'' +
+                ", state='" + state + '\'' +
+                ", city='" + city + '\'' +
+                ", zipcode='" + zipcode + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                '}';
+    }
 }

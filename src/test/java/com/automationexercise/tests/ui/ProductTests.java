@@ -42,22 +42,24 @@ public class ProductTests extends BaseTestUi {
         Response response = new ProductApiService().searchProduct(searchWord);
         Map<String, String> apiSearchData = response.jsonPath().getMap("products.collect { [it.name, it.category.category] }.collectEntries()");
 
-        SoftAssert softAssert = new SoftAssert();
-        for (String productName : searchedProductNames) {
-            String lowerName = productName.toLowerCase();
-            String lowerSearch = searchWord.toLowerCase();
+        Allure.step("Validate searched products with results and API data", () -> {
+            SoftAssert softAssert = new SoftAssert();
+            for (String productName : searchedProductNames) {
+                String lowerName = productName.toLowerCase();
+                String lowerSearch = searchWord.toLowerCase();
 
-            // Check 1: Is the word in the name
-            if (lowerName.contains(lowerSearch)) {
-                continue;
+                // Check 1: Is the word in the name
+                if (lowerName.contains(lowerSearch)) {
+                    continue;
+                }
+                // Check 2: If not in name, check the Category from API response
+                String category = apiSearchData.get(productName);
+                softAssert.assertTrue(category.toLowerCase().contains(lowerSearch),
+                        String.format("Product '%s' is invalid. Search word '%s' not found in Name OR Category (%s)",
+                                productName, searchWord, category));
             }
-            // Check 2: If not in name, check the Category from API response
-            String category = apiSearchData.get(productName);
-            softAssert.assertTrue(category.toLowerCase().contains(lowerSearch),
-                    String.format("Product '%s' is invalid. Search word '%s' not found in Name OR Category (%s)",
-                            productName, searchWord, category));
-        }
-        softAssert.assertAll();
+            softAssert.assertAll();
+        });
     }
 
     @Test
@@ -80,13 +82,15 @@ public class ProductTests extends BaseTestUi {
         String cardPrice = DataConverter.sanitizePrice(productCardDetails.price());
         String detailsPrice = DataConverter.sanitizePrice(productDetails.price());
 
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(productCardDetails.name(), productDetails.name(), "Product name on card does not match details name");
-        softAssert.assertEquals(cardPrice, detailsPrice, "Product price on card does not match details price");
-        softAssert.assertFalse(productDetails.brand().isBlank(), "Product brand is blank");
-        softAssert.assertFalse(productDetails.category().isBlank(), "Product category is blank");
-        softAssert.assertFalse(productDetails.availability().isBlank(), "Product availability is blank");
-        softAssert.assertFalse(productDetails.condition().isBlank(), "Product condition is blank");
-        softAssert.assertAll();
+        Allure.step("Verify product card details match the page's details", () -> {
+            SoftAssert softAssert = new SoftAssert();
+            softAssert.assertEquals(productCardDetails.name(), productDetails.name(), "Product name on card does not match details name");
+            softAssert.assertEquals(cardPrice, detailsPrice, "Product price on card does not match details price");
+            softAssert.assertFalse(productDetails.brand().isBlank(), "Product brand is blank");
+            softAssert.assertFalse(productDetails.category().isBlank(), "Product category is blank");
+            softAssert.assertFalse(productDetails.availability().isBlank(), "Product availability is blank");
+            softAssert.assertFalse(productDetails.condition().isBlank(), "Product condition is blank");
+            softAssert.assertAll();
+        });
     }
 }

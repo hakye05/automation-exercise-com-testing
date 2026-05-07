@@ -1,9 +1,11 @@
 package com.automationexercise.api;
 
 import com.automationexercise.utils.ConfigReader;
-import io.qameta.allure.restassured.AllureRestAssured;
+import com.automationexercise.utils.allure.MaskingAllureFilter;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Global API configuration class.
@@ -15,6 +17,7 @@ public class ApiClient {
 
     private static final ThreadLocal<RequestSpecification> requestSpec = new ThreadLocal<>();
     private static final String API_URL = ConfigReader.getProperty("api.url");
+    private static final Logger log = LoggerFactory.getLogger(ApiClient.class);
 
     /**
      * Provides a new thread specific {@link RequestSpecification} if it has not been initialized for current thread,
@@ -23,9 +26,10 @@ public class ApiClient {
      * */
     public static RequestSpecification getRequestSpec() {
         if (requestSpec.get() == null) {
+            log.debug("Initializing new RequestSpecification for Thread: {}", Thread.currentThread().getName());
             RequestSpecification spec = new RequestSpecBuilder()
                     .setBaseUri(API_URL)
-                    .addFilter(new AllureRestAssured())
+                    .addFilter(new MaskingAllureFilter())
                     .build();
             requestSpec.set(spec);
         }
@@ -37,6 +41,7 @@ public class ApiClient {
      * result memory leaks.
      * */
     public static void cleanup() {
+        log.debug("Cleaning up RequestSpecification for Thread: {}", Thread.currentThread().getName());
         requestSpec.remove();
     }
 }

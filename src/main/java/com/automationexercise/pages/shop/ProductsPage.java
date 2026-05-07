@@ -154,7 +154,6 @@ public class ProductsPage extends BasePage {
         return allProductNames;
     }
 
-    @Step("Get products page title")
     public String getProductsHeader() {
         return getText(productsHeader);
     }

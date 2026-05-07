@@ -115,12 +115,10 @@ public class HomePage extends BasePage {
     }
 
     // Getter Methods
-    @Step("Get logged in as user header")
     public String getLoggedInAsUser() {
         return getText(loggedInAsHeader);
     }
 
-    @Step("Get home page title")
     public String getHomeHeader() {
         return getText(homeHeader);
     }

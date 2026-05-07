@@ -46,15 +46,17 @@ public class CartTests extends BaseTestUi {
             ProductCardDetails expectedData = products.get(i);
             CartItemDetails actualData = cartItems.get(i);
 
-            softAssert.assertEquals(actualData.name(), expectedData.name(), "Name mismatch for: " + expectedData.name());
-            softAssert.assertEquals(actualData.price(), expectedData.price(), "Price mismatch for: " + expectedData.name());
-            softAssert.assertEquals(actualData.quantity(), "1", "Expected quantity to be 1 for: " + expectedData.name());
+            Allure.step("Checking product: " + expectedData.name(), () -> {
+                softAssert.assertEquals(actualData.name(), expectedData.name(), "Name mismatch for: " + expectedData.name());
+                softAssert.assertEquals(actualData.price(), expectedData.price(), "Price mismatch for: " + expectedData.name());
+                softAssert.assertEquals(actualData.quantity(), "1", "Expected quantity to be 1 for: " + expectedData.name());
 
-            BigDecimal expectedPrice = DataConverter.convertToDecimalNumber(expectedData.price());
-            BigDecimal actualTotal = DataConverter.convertToDecimalNumber(expectedData.price());
-            BigDecimal expectedTotal = expectedPrice.multiply(new BigDecimal(quantity));
+                BigDecimal expectedPrice = DataConverter.convertToDecimalNumber(expectedData.price());
+                BigDecimal actualTotal = DataConverter.convertToDecimalNumber(expectedData.price());
+                BigDecimal expectedTotal = expectedPrice.multiply(new BigDecimal(quantity));
 
-            softAssert.assertEquals(actualTotal, expectedTotal, "Total price mismatch for: " + expectedData.name());
+                softAssert.assertEquals(actualTotal, expectedTotal, "Total price mismatch for: " + expectedData.name());
+            });
         }
         softAssert.assertAll();
     }
@@ -75,7 +77,9 @@ public class CartTests extends BaseTestUi {
                 .clickAddToCart()
                 .acceptViewCartModal();
         int actualQuantity = Integer.parseInt(cartPage.getCartItemQuantity(0));
-        Assert.assertEquals(actualQuantity, quantity, "The amount inside the cart does not match the added product amount");
+        Allure.step("Checking the product amount inside the cart", () -> {
+            Assert.assertEquals(actualQuantity, quantity, "The amount inside the cart does not match the added product amount");
+        });
     }
 
     @Test
@@ -94,6 +98,8 @@ public class CartTests extends BaseTestUi {
                 .clickDeleteCartItem(0)
                 .waitForCartClear()
                 .getEmptyCartHeader();
-        Assert.assertTrue(emptyCartHeader.contains(CartPage.CART_EMPTY), "Expected empty cart header to be displayed");
+        Allure.step("Verify cart is empty", () -> {
+            Assert.assertTrue(emptyCartHeader.contains(CartPage.CART_EMPTY), "Expected empty cart header to be displayed");
+        });
     }
 }

@@ -111,12 +111,10 @@ public class CartPage extends BasePage {
         return getText(findNested(targetItem, itemQuantity));
     }
 
-    @Step("Get empty cart title")
     public String getEmptyCartHeader() {
         return getText(emptyCartHeader);
     }
 
-    @Step("Get cart page header")
     public String getCartHeader() {
         return getText(cartHeader);
     }

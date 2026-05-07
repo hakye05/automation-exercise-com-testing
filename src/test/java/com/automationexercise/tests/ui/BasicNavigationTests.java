@@ -21,6 +21,8 @@ public class BasicNavigationTests extends BaseTestUi {
         String testCasesTitle = new HomePage(getDriver())
                 .clickTestCasesLink()
                 .getTestCasesHeader();
-        Assert.assertEquals(testCasesTitle, TestCasesPage.TEST_CASES_HEADER, "Expected test cases header to be visible");
+        Allure.step("Verify test cases header was displayed", () -> {
+            Assert.assertEquals(testCasesTitle, TestCasesPage.TEST_CASES_HEADER, "Expected test cases header to be visible");
+        });
     }
 }

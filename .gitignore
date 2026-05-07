@@ -42,3 +42,6 @@ build/
 
 ### Allure reports and results ###
 allure-results/
+
+### Logs ###
+logs/

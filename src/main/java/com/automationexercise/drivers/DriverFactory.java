@@ -3,6 +3,8 @@ package com.automationexercise.drivers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Factory class for managing {@link WebDriver} instances.
@@ -11,6 +13,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 public class DriverFactory {
 
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static final Logger log = LoggerFactory.getLogger(DriverFactory.class);
 
     /**
      * Initializes a new browser session for current thread.
@@ -20,6 +23,7 @@ public class DriverFactory {
     public static void initDriver(String browser) {
         WebDriver webDriver;
 
+        log.info("Initializing {} browser on Thread: {}", browser, Thread.currentThread().getName());
         switch (browser.toLowerCase()) {
             case "chrome" -> webDriver = new ChromeDriver(BrowserOptions.getChromeOptions());
             case "edge" -> webDriver = new EdgeDriver(BrowserOptions.getEdgeOptions());
@@ -43,6 +47,7 @@ public class DriverFactory {
      * */
     public static void quitDriver() {
         if (driver.get() != null) {
+            log.info("Quitting driver on Thread: {}", Thread.currentThread().getName());
             driver.get().quit();
             driver.remove();
         }

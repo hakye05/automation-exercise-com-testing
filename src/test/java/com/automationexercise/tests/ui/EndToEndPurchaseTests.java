@@ -40,7 +40,9 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
                 .fillSignUpForm(user.name(), user.email())
                 .clickSignup()
                 .signupUser(user);
-        Assert.assertEquals(accountCreatedPage.getAccountCreatedHeader(), AccountCreatedPage.ACCOUNT_CREATED, "Expected account created header to be displayed");
+        Allure.step("Verify account created header is displayed", () -> {
+            Assert.assertEquals(accountCreatedPage.getAccountCreatedHeader(), AccountCreatedPage.ACCOUNT_CREATED, "Expected account created header to be displayed");
+        });
 
         HomePage homePage = accountCreatedPage
                 .clickContinue();
@@ -51,8 +53,10 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
                 .clickCheckoutButton();
         AddressDetails deliveryAddress = checkoutPage.getDeliveryAddress();
         AddressDetails invoiceAddress = checkoutPage.getInvoiceAddress();
-        Assert.assertEquals(deliveryAddress, addressData, "Delivery address does not match user address");
-        Assert.assertEquals(invoiceAddress, addressData, "Invoice address does not match user address");
+        Allure.step("Validate delivery and invoice addresses", () -> {
+            Assert.assertEquals(deliveryAddress, addressData, "Delivery address does not match user address");
+            Assert.assertEquals(invoiceAddress, addressData, "Invoice address does not match user address");
+        });
 
         PaymentSuccessPage paymentSuccessPage = checkoutPage
                 .clickPlaceOrder()
@@ -62,7 +66,9 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
                 .enterCardExpirationMonth(paymentData.expirationMonth())
                 .enterCardExpirationYear(paymentData.expirationYear())
                 .clickConfirmPaymentButton();
-        Assert.assertEquals(paymentSuccessPage.getOrderPlacedHeader(), PaymentSuccessPage.ORDER_PLACED, "Expected successful order message to be displayed");
+        Allure.step("Verify successful order message is displayed", () -> {
+            Assert.assertEquals(paymentSuccessPage.getOrderPlacedHeader(), PaymentSuccessPage.ORDER_PLACED, "Expected successful order message to be displayed");
+        });
 
         AccountDeletedPage accountDeletedPage = paymentSuccessPage
                 .clickContinue()
@@ -72,7 +78,9 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
         String homeHeaderText = accountDeletedPage
                 .clickContinue()
                 .getHomeHeader();
-        Assert.assertEquals(homeHeaderText, HomePage.HOME_HEADER, "Expected to see a home page title");
+        Allure.step("Verify home header is displayed", () -> {
+            Assert.assertEquals(homeHeaderText, HomePage.HOME_HEADER, "Expected to see a home page title");
+        });
 
         user = null;
     }
@@ -93,7 +101,9 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
                 .fillSignUpForm(user.name(), user.email())
                 .clickSignup()
                 .signupUser(user);
-        Assert.assertEquals(accountCreatedPage.getAccountCreatedHeader(), AccountCreatedPage.ACCOUNT_CREATED, "Expected account created header to be displayed");
+        Allure.step("Verify account created header is displayed", () -> {
+            Assert.assertEquals(accountCreatedPage.getAccountCreatedHeader(), AccountCreatedPage.ACCOUNT_CREATED, "Expected account created header to be displayed");
+        });
 
         HomePage homePage = accountCreatedPage
                 .clickContinue();
@@ -109,8 +119,10 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
                 .clickCheckoutButton();
         AddressDetails deliveryAddress = checkoutPage.getDeliveryAddress();
         AddressDetails invoiceAddress = checkoutPage.getInvoiceAddress();
-        Assert.assertEquals(deliveryAddress, addressData, "Delivery address does not match user address");
-        Assert.assertEquals(invoiceAddress, addressData, "Delivery address does not match user address");
+        Allure.step("Validate delivery and invoice addresses", () -> {
+            Assert.assertEquals(deliveryAddress, addressData, "Delivery address does not match user address");
+            Assert.assertEquals(invoiceAddress, addressData, "Invoice address does not match user address");
+        });
 
         PaymentSuccessPage paymentSuccessPage = checkoutPage
                 .clickPlaceOrder()
@@ -120,17 +132,23 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
                 .enterCardExpirationMonth(paymentData.expirationMonth())
                 .enterCardExpirationYear(paymentData.expirationYear())
                 .clickConfirmPaymentButton();
-        Assert.assertEquals(paymentSuccessPage.getOrderPlacedHeader(), PaymentSuccessPage.ORDER_PLACED, "Expected successful order message to be displayed");
+        Allure.step("Verify successful order header is displayed", () -> {
+            Assert.assertEquals(paymentSuccessPage.getOrderPlacedHeader(), PaymentSuccessPage.ORDER_PLACED, "Expected successful order message to be displayed");
+        });
 
         AccountDeletedPage accountDeletedPage = paymentSuccessPage
                 .clickContinue()
                 .clickDeleteAccountLink();
-        Assert.assertEquals(accountDeletedPage.getAccountDeletedHeader(), AccountDeletedPage.ACCOUNT_DELETED, "Expected account deleted header to be displayed");
+        Allure.step("Verify account deleted header is displayed", () -> {
+            Assert.assertEquals(accountDeletedPage.getAccountDeletedHeader(), AccountDeletedPage.ACCOUNT_DELETED, "Expected account deleted header to be displayed");
+        });
 
         String homeHeaderText = accountDeletedPage
                 .clickContinue()
                 .getHomeHeader();
-        Assert.assertEquals(homeHeaderText, HomePage.HOME_HEADER, "Expected to see a home page title");
+        Allure.step("Verify home header is displayed", () -> {
+            Assert.assertEquals(homeHeaderText, HomePage.HOME_HEADER, "Expected to see a home page title");
+        });
 
         user = null;
     }

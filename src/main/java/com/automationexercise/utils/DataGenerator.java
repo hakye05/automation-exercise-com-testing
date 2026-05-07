@@ -29,7 +29,7 @@ public class DataGenerator {
         String suffix = getRandomUUID();
         return new UserData(
                 "John", "john" + suffix + "@example.com",
-                "pass123", "Mr", "10", "February", "2000",
+                "pass" + getRandomInt(1000, 9999), "Mr", "10", "February", "2000",
                 "John", "Whiskers", "John Software inc",
                 "Bay Street 12", "Building 22",
                 "Canada", "Toronto State", "Toronto", "929919",

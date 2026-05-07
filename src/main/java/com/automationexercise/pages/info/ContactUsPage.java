@@ -57,6 +57,7 @@ public class ContactUsPage extends BasePage {
 
     @Step("Click 'Submit' button")
     public ContactUsPage clickSubmit() {
+        scrollTo(submitButton);
         click(submitButton);
         return this;
     }
@@ -68,12 +69,10 @@ public class ContactUsPage extends BasePage {
     }
 
     // Getter Methods
-    @Step("Get contact form title")
     public String getContactUsHeader() {
         return getText(contactUsHeader);
     }
 
-    @Step("Get successful contact form submit message")
     public String getContactUsSuccessMessage() {
         return getText(contactUsSuccessMessage);
     }

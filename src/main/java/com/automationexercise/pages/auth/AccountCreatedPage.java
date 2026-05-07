@@ -23,7 +23,6 @@ public class AccountCreatedPage extends BasePage {
         return new HomePage(driver);
     }
 
-    @Step("Get created account page title")
     public String getAccountCreatedHeader() {
         return getText(accountCreatedHeader);
     }

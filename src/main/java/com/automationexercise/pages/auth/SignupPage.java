@@ -68,7 +68,6 @@ public class SignupPage extends BasePage {
     }
 
     // Getter Methods
-    @Step("Get pre-filled values from name and email fields")
     public Map<String, String> getPrefilledSignupFields() {
         return Map.of(
                 "name", getTextFromField(nameInput),
@@ -76,7 +75,6 @@ public class SignupPage extends BasePage {
         );
     }
 
-    @Step("Get signup page form title")
     public String getSignupHeader() {
         return getText(signupHeader);
     }

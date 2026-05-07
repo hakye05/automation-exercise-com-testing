@@ -31,7 +31,6 @@ public class PaymentSuccessPage extends BasePage {
     }
 
     // Getter Methods
-    @Step("Get payment success page title")
     public String getOrderPlacedHeader() {
         return getText(orderPlacedHeader);
     }

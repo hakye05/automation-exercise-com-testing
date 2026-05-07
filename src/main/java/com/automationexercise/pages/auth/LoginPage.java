@@ -2,6 +2,7 @@ package com.automationexercise.pages.auth;
 
 import com.automationexercise.pages.HomePage;
 import com.automationexercise.pages.base.BasePage;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -37,8 +38,8 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    @Step("Enter login password: '{0}'")
     public LoginPage enterLoginPassword(String password) {
+        Allure.step("Enter Login Password");
         type(loginPasswordInput, password);
         return this;
     }
@@ -52,13 +53,6 @@ public class LoginPage extends BasePage {
     @Step("Click 'login' button expecting error")
     public LoginPage clickLoginExpectingError() {
         click(loginButton);
-        return this;
-    }
-
-    @Step("Fill login form")
-    public LoginPage fillLoginForm(String email, String password) {
-        enterLoginEmail(email);
-        enterLoginPassword(password);
         return this;
     }
 
@@ -94,22 +88,18 @@ public class LoginPage extends BasePage {
     }
 
     // Getter Methods
-    @Step("Get incorrect email or password message")
     public String getIncorrectCredentialsMessage() {
         return getText(incorrectCredentialsMessage);
     }
 
-    @Step("Get email in use message")
     public String getEmailInUseMessage() {
         return getText(emailInUseMessage);
     }
 
-    @Step("Get login form title")
     public String getLoginHeader() {
         return getText(loginHeader);
     }
 
-    @Step("Get signup form title")
     public String getSignupHeader() {
         return getText(signupHeader);
     }

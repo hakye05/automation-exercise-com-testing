@@ -15,7 +15,6 @@ public class TestCasesPage extends BasePage {
         super(driver);
     }
 
-    @Step("Get test cases page title")
     public String getTestCasesHeader() {
         return getText(testCasesHeader);
     }

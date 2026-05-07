@@ -23,7 +23,6 @@ public class AccountDeletedPage extends BasePage {
         return new HomePage(driver);
     }
 
-    @Step("Get deleted account page title")
     public String getAccountDeletedHeader() {
         return getText(accountDeletedHeader);
     }
