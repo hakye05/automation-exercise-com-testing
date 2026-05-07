@@ -49,13 +49,13 @@ public class HomePage extends BasePage {
         return new LoginPage(driver);
     }
 
-    @Step("Click 'Delete Account' button in navbar")
+    @Step("Click 'Log Out' button in navbar")
     public LoginPage clickLogoutLink() {
         clickAvoidingVignette(logoutLink);
         return new LoginPage(driver);
     }
 
-    @Step("Click 'Logout' button in navbar")
+    @Step("Click 'Delete Account' button in navbar")
     public AccountDeletedPage clickDeleteAccountLink() {
         clickAvoidingVignette(deleteAccountLink);
         return new AccountDeletedPage(driver);
