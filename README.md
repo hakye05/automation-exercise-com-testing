@@ -72,6 +72,11 @@ The report includes parallel execution timeline:
 
 ![report-timeline.png](docs/screenshots/report-timeline.png)
 
+Running tests without vignette handler caused failed tests with screenshot and page source attachments:
+
+![report-failure-image.png](docs/screenshots/report-failure-image.png)
+
+![report-failure-message.png](docs/screenshots/report-failure-message.png)
 
 ## Technical Implementation Notes
 
