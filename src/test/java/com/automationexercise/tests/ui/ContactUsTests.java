@@ -24,7 +24,7 @@ public class ContactUsTests extends BaseTestUi {
 
         ContactUsPage contactUsPage = new HomePage(getDriver())
                 .clickContactUsLink();
-        Assert.assertEquals(contactUsPage.getContactUsHeader(), ContactUsPage.CONTACT_US_HEADER, "Expected contact us header to be displayed");
+        Assert.assertEquals(contactUsPage.getContactUsHeader(), ContactUsPage.CONTACT_US_HEADER, "Expected contact us header to be displayed.");
 
         String successMessageText = contactUsPage
                 .enterName(user.name())
@@ -36,7 +36,7 @@ public class ContactUsTests extends BaseTestUi {
                 .acceptSubmitAlert()
                 .getContactUsSuccessMessage();
         Allure.step("Verify contact success message is displayed", () -> {
-            Assert.assertEquals(successMessageText, ContactUsPage.CONTACT_SUCCESSFUL, "The contact success message was not displayed");
+            Assert.assertEquals(successMessageText, ContactUsPage.CONTACT_SUCCESSFUL, "The contact success message was not displayed.");
         });
     }
 }

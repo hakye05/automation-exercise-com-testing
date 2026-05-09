@@ -32,7 +32,7 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
         CartPage cartPage = new HomePage(getDriver())
                 .clickAddToCart(0)
                 .acceptViewCartModal();
-        Assert.assertEquals(cartPage.getCartHeader(), CartPage.CART_HEADER, "Expected cart header to be displayed");
+        Assert.assertEquals(cartPage.getCartHeader(), CartPage.CART_HEADER, "Expected cart header to be displayed.");
 
         AccountCreatedPage accountCreatedPage = cartPage
                 .clickCheckoutButtonAsGuest()
@@ -41,12 +41,12 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
                 .clickSignup()
                 .signupUser(user);
         Allure.step("Verify account created header is displayed", () -> {
-            Assert.assertEquals(accountCreatedPage.getAccountCreatedHeader(), AccountCreatedPage.ACCOUNT_CREATED, "Expected account created header to be displayed");
+            Assert.assertEquals(accountCreatedPage.getAccountCreatedHeader(), AccountCreatedPage.ACCOUNT_CREATED, "Expected account created header to be displayed.");
         });
 
         HomePage homePage = accountCreatedPage
                 .clickContinue();
-        Assert.assertEquals(homePage.getLoggedInAsUser(), HomePage.LOGGED_IN_AS + user.name(), "Expected header to display that user is logged in");
+        Assert.assertEquals(homePage.getLoggedInAsUser(), HomePage.LOGGED_IN_AS + user.name(), "Expected header to display that user is logged in.");
 
         CheckoutPage checkoutPage = homePage
                 .clickCartLink()
@@ -54,8 +54,8 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
         AddressDetails deliveryAddress = checkoutPage.getDeliveryAddress();
         AddressDetails invoiceAddress = checkoutPage.getInvoiceAddress();
         Allure.step("Validate delivery and invoice addresses", () -> {
-            Assert.assertEquals(deliveryAddress, addressData, "Delivery address does not match user address");
-            Assert.assertEquals(invoiceAddress, addressData, "Invoice address does not match user address");
+            Assert.assertEquals(deliveryAddress, addressData, "Delivery address does not match user address.");
+            Assert.assertEquals(invoiceAddress, addressData, "Invoice address does not match user address.");
         });
 
         PaymentSuccessPage paymentSuccessPage = checkoutPage
@@ -67,19 +67,19 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
                 .enterCardExpirationYear(paymentData.expirationYear())
                 .clickConfirmPaymentButton();
         Allure.step("Verify successful order message is displayed", () -> {
-            Assert.assertEquals(paymentSuccessPage.getOrderPlacedHeader(), PaymentSuccessPage.ORDER_PLACED, "Expected successful order message to be displayed");
+            Assert.assertEquals(paymentSuccessPage.getOrderPlacedHeader(), PaymentSuccessPage.ORDER_PLACED, "Expected successful order message to be displayed.");
         });
 
         AccountDeletedPage accountDeletedPage = paymentSuccessPage
                 .clickContinue()
                 .clickDeleteAccountLink();
-        Assert.assertEquals(accountDeletedPage.getAccountDeletedHeader(), AccountDeletedPage.ACCOUNT_DELETED, "Expected account deleted header to be displayed");
+        Assert.assertEquals(accountDeletedPage.getAccountDeletedHeader(), AccountDeletedPage.ACCOUNT_DELETED, "Expected account deleted header to be displayed.");
 
         String homeHeaderText = accountDeletedPage
                 .clickContinue()
                 .getHomeHeader();
         Allure.step("Verify home header is displayed", () -> {
-            Assert.assertEquals(homeHeaderText, HomePage.HOME_HEADER, "Expected to see a home page title");
+            Assert.assertEquals(homeHeaderText, HomePage.HOME_HEADER, "Expected to see a home page title.");
         });
 
         user = null;
@@ -102,17 +102,17 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
                 .clickSignup()
                 .signupUser(user);
         Allure.step("Verify account created header is displayed", () -> {
-            Assert.assertEquals(accountCreatedPage.getAccountCreatedHeader(), AccountCreatedPage.ACCOUNT_CREATED, "Expected account created header to be displayed");
+            Assert.assertEquals(accountCreatedPage.getAccountCreatedHeader(), AccountCreatedPage.ACCOUNT_CREATED, "Expected account created header to be displayed.");
         });
 
         HomePage homePage = accountCreatedPage
                 .clickContinue();
-        Assert.assertEquals(homePage.getLoggedInAsUser(), HomePage.LOGGED_IN_AS + user.name(), "Expected header to display that user is logged in");
+        Assert.assertEquals(homePage.getLoggedInAsUser(), HomePage.LOGGED_IN_AS + user.name(), "Expected header to display that user is logged in.");
 
         CartPage cartPage = homePage
                 .clickAddToCart(0)
                 .acceptViewCartModal();
-        Assert.assertEquals(cartPage.getCartHeader(), CartPage.CART_HEADER, "Expected cart header to be displayed");
+        Assert.assertEquals(cartPage.getCartHeader(), CartPage.CART_HEADER, "Expected cart header to be displayed.");
 
         CheckoutPage checkoutPage = homePage
                 .clickCartLink()
@@ -120,8 +120,8 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
         AddressDetails deliveryAddress = checkoutPage.getDeliveryAddress();
         AddressDetails invoiceAddress = checkoutPage.getInvoiceAddress();
         Allure.step("Validate delivery and invoice addresses", () -> {
-            Assert.assertEquals(deliveryAddress, addressData, "Delivery address does not match user address");
-            Assert.assertEquals(invoiceAddress, addressData, "Invoice address does not match user address");
+            Assert.assertEquals(deliveryAddress, addressData, "Delivery address does not match user address.");
+            Assert.assertEquals(invoiceAddress, addressData, "Invoice address does not match user address.");
         });
 
         PaymentSuccessPage paymentSuccessPage = checkoutPage
@@ -133,21 +133,21 @@ public class EndToEndPurchaseTests extends BaseTestUiUser {
                 .enterCardExpirationYear(paymentData.expirationYear())
                 .clickConfirmPaymentButton();
         Allure.step("Verify successful order header is displayed", () -> {
-            Assert.assertEquals(paymentSuccessPage.getOrderPlacedHeader(), PaymentSuccessPage.ORDER_PLACED, "Expected successful order message to be displayed");
+            Assert.assertEquals(paymentSuccessPage.getOrderPlacedHeader(), PaymentSuccessPage.ORDER_PLACED, "Expected successful order message to be displayed.");
         });
 
         AccountDeletedPage accountDeletedPage = paymentSuccessPage
                 .clickContinue()
                 .clickDeleteAccountLink();
         Allure.step("Verify account deleted header is displayed", () -> {
-            Assert.assertEquals(accountDeletedPage.getAccountDeletedHeader(), AccountDeletedPage.ACCOUNT_DELETED, "Expected account deleted header to be displayed");
+            Assert.assertEquals(accountDeletedPage.getAccountDeletedHeader(), AccountDeletedPage.ACCOUNT_DELETED, "Expected account deleted header to be displayed.");
         });
 
         String homeHeaderText = accountDeletedPage
                 .clickContinue()
                 .getHomeHeader();
         Allure.step("Verify home header is displayed", () -> {
-            Assert.assertEquals(homeHeaderText, HomePage.HOME_HEADER, "Expected to see a home page title");
+            Assert.assertEquals(homeHeaderText, HomePage.HOME_HEADER, "Expected to see a home page title.");
         });
 
         user = null;

@@ -31,12 +31,12 @@ public class ProductTests extends BaseTestUi {
 
         ProductsPage productsPage = new HomePage(getDriver())
                 .clickProductsLink();
-        Assert.assertEquals(productsPage.getProductsHeader(), ProductsPage.PRODUCTS_ALL, "Expected products header to be displayed");
+        Assert.assertEquals(productsPage.getProductsHeader(), ProductsPage.PRODUCTS_ALL, "Expected products header to be displayed.");
 
         productsPage = productsPage
                 .enterSearchWord(searchWord)
                 .clickSearchButton();
-        Assert.assertEquals(productsPage.getProductsHeader(), ProductsPage.PRODUCTS_SEARCHED, "Expected searched products header to be displayed");
+        Assert.assertEquals(productsPage.getProductsHeader(), ProductsPage.PRODUCTS_SEARCHED, "Expected searched products header to be displayed.");
 
         List<String> searchedProductNames = productsPage.getAllProductNames();
         Response response = new ProductApiService().searchProduct(searchWord);
@@ -55,7 +55,7 @@ public class ProductTests extends BaseTestUi {
                 // Check 2: If not in name, check the Category from API response
                 String category = apiSearchData.get(productName);
                 softAssert.assertTrue(category.toLowerCase().contains(lowerSearch),
-                        String.format("Product '%s' is invalid. Search word '%s' not found in Name OR Category (%s)",
+                        String.format("Product '%s' is invalid. Search word '%s' not found in Name OR Category (%s).",
                                 productName, searchWord, category));
             }
             softAssert.assertAll();
@@ -71,8 +71,8 @@ public class ProductTests extends BaseTestUi {
 
         ProductsPage productsPage = new HomePage(getDriver())
                 .clickProductsLink();
-        Assert.assertEquals(productsPage.getProductsHeader(), ProductsPage.PRODUCTS_ALL, "Expected products header to be displayed");
-        Assert.assertFalse(productsPage.getAllProductNames().isEmpty(), "Expected products list not to be empty");
+        Assert.assertEquals(productsPage.getProductsHeader(), ProductsPage.PRODUCTS_ALL, "Expected products header to be displayed.");
+        Assert.assertFalse(productsPage.getAllProductNames().isEmpty(), "Expected products list not to be empty.");
 
         ProductCardDetails productCardDetails = productsPage.getProductCardDetails(0);
         ProductDetailsPage productDetailsPage = productsPage
@@ -84,12 +84,12 @@ public class ProductTests extends BaseTestUi {
 
         Allure.step("Verify product card details match the page's details", () -> {
             SoftAssert softAssert = new SoftAssert();
-            softAssert.assertEquals(productCardDetails.name(), productDetails.name(), "Product name on card does not match details name");
-            softAssert.assertEquals(cardPrice, detailsPrice, "Product price on card does not match details price");
-            softAssert.assertFalse(productDetails.brand().isBlank(), "Product brand is blank");
-            softAssert.assertFalse(productDetails.category().isBlank(), "Product category is blank");
-            softAssert.assertFalse(productDetails.availability().isBlank(), "Product availability is blank");
-            softAssert.assertFalse(productDetails.condition().isBlank(), "Product condition is blank");
+            softAssert.assertEquals(productCardDetails.name(), productDetails.name(), "Product name on card does not match details name.");
+            softAssert.assertEquals(cardPrice, detailsPrice, "Product price on card does not match details price.");
+            softAssert.assertFalse(productDetails.brand().isBlank(), "Product brand is blank.");
+            softAssert.assertFalse(productDetails.category().isBlank(), "Product category is blank.");
+            softAssert.assertFalse(productDetails.availability().isBlank(), "Product availability is blank.");
+            softAssert.assertFalse(productDetails.condition().isBlank(), "Product condition is blank.");
             softAssert.assertAll();
         });
     }

@@ -78,7 +78,7 @@ public class CartTests extends BaseTestUi {
                 .acceptViewCartModal();
         int actualQuantity = Integer.parseInt(cartPage.getCartItemQuantity(0));
         Allure.step("Checking the product amount inside the cart", () -> {
-            Assert.assertEquals(actualQuantity, quantity, "The amount inside the cart does not match the added product amount");
+            Assert.assertEquals(actualQuantity, quantity, "The amount inside the cart does not match the added product amount.");
         });
     }
 
@@ -92,14 +92,14 @@ public class CartTests extends BaseTestUi {
         CartPage cartPage = new HomePage(getDriver())
                 .clickAddToCart(0)
                 .acceptViewCartModal();
-        Assert.assertEquals(cartPage.getCartHeader(), CartPage.CART_HEADER, "Expected cart header to be displayed");
+        Assert.assertEquals(cartPage.getCartHeader(), CartPage.CART_HEADER, "Expected cart header to be displayed.");
 
         String emptyCartHeader = cartPage
                 .clickDeleteCartItem(0)
                 .waitForCartClear()
                 .getEmptyCartHeader();
         Allure.step("Verify cart is empty", () -> {
-            Assert.assertTrue(emptyCartHeader.contains(CartPage.CART_EMPTY), "Expected empty cart header to be displayed");
+            Assert.assertTrue(emptyCartHeader.contains(CartPage.CART_EMPTY), "Expected empty cart header to be displayed.");
         });
     }
 }
