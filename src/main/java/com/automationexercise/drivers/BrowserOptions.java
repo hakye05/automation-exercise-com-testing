@@ -17,10 +17,10 @@ public class BrowserOptions {
         );
         switch (headlessMode) {
             case "new":
-                options.addArguments("--headless");
+                options.addArguments("--headless=new");
                 break;
             case "true":
-                options.addArguments("--headless=new");
+                options.addArguments("--headless=true");
                 break;
             case "false":
                 break;
