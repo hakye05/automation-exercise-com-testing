@@ -87,11 +87,6 @@ This project only masks password field:
 
 ![request-screenshot.png](docs/screenshots/request-screenshot.png)
 
-### **Thread-Safe Logging**
-To show the threads execution timeline clearly during parallel execution, the framework utilizes logback.
-
-![logs.png](docs/screenshots/logs.png)
-
 ### **Constant-Driven Page Objects**
 To prevent tests from becoming brittle, all UI text (headers, success messages, error alerts) are stored as `public static final` constants within Page Object classes.
 * **Benefit:** If the website developers change a message from *"Account Deleted!"* to *"User Removed!"*, we only update one constant instead of searching through dozens of tests.
